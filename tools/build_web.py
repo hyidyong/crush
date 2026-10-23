@@ -21,6 +21,8 @@ RUNTIME_COMMIT = '5ab484fcee674a99492cceb7bf3340239da63d7a'
 RUNTIME_BASE = f'https://raw.githubusercontent.com/pygame-web/archives/{RUNTIME_COMMIT}/'
 RUNTIME_HASHES = {
     'pythons.js': 'e11be94dd16c29ccbb0387735df5888e0050766b2c58eae636911259e915765f',
+    'browserfs.min.js': 'ba01fda78db31a7ba579afe74b8b56cf4636381ca1b6c54ffba20467756a627f',
+    'empty.ogg': '884c20d864222b845aa78fb078ec370f4ddaa203cd92ace28440ed7733403b40',
     'cpythonrc.py': 'b97d4ddf862207d59907bdd1b62658a2eeca479bdbf80e733bc7a66d76efc9e4',
     'cpython312/main.js': 'b6663c0257a5b696f85bd5920a4ee7d1a579e80e62699ea31fbe0c872a0f64f9',
     'cpython312/main.wasm': '0d1fc2968ab55cad57076adea9876f00dba0749c1d93eb14cea6122945933c06',
@@ -39,6 +41,9 @@ aio.pep0723.Config.PKG_INDEXES = [_local_repo]
 aio.pep0723.Config.dev_mode = 1
 _original_async_repos = aio.pep0723.async_repos
 async def _same_origin_repos():
+    # Upstream appends indexes and later indexes this list against PKG_INDEXES.
+    # Our CDN rewrite changes equality, so reload must discard old dictionaries.
+    aio.pep0723.Config.pkg_repolist.clear()
     await _original_async_repos()
     for repo in aio.pep0723.Config.pkg_repolist:
         repo["-CDN-"] = _local_repo

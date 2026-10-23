@@ -1,0 +1,20 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#000000"><title>Unsent</title><link rel="stylesheet" href="/bridge.css"></head><body>
+<main id="phone"><canvas id="canvas" width="414" height="896" tabindex="0" aria-label="Unsent 메시지"></canvas><textarea id="composer" aria-label="메시지" maxlength="2000" hidden></textarea><input type="file" id="bot-file-input" accept=".txt,.md,text/plain,text/markdown" hidden><div id="chatlog" aria-live="polite"></div><div id="loading"><strong>Unsent</strong><span id="loading-message">개인 공간을 준비하고 있어요…</span><button id="retry" hidden>다시 시도 / Retry</button></div></main>
+<script src="/bridge.js"></script>
+<script type="module" src="/runtime/pythons.js" data-os="fs,snd,gui" data-python="cpython312" data-LINES="40" data-COLUMNS="100" data-ume_block="0" data-ume_fs="0" data-can_close="0" data-canvas="canvas" data-user_canvas="1" data-user_canvas_managed="1" async defer>
+import asyncio,sys,os,zipfile
+import pygame
+from pathlib import Path
+import platform
+while not platform.window.unsentBridge.isReady():
+    await asyncio.sleep(.05)
+async with platform.fopen('/app.zip','rb') as source:
+    Path('/tmp/unsent.zip').write_bytes(source.read())
+os.makedirs('/data/unsent',exist_ok=True)
+with zipfile.ZipFile('/tmp/unsent.zip') as package:
+    package.extractall('/data/unsent')
+sys.path.insert(0,'/data/unsent')
+os.chdir('/data/unsent')
+from unsent.client.app import ClientConfig,run
+await run(ClientConfig(asset_root=Path('/data/unsent/assets'),web=True))
+</script></body></html>

@@ -94,3 +94,48 @@ def test_local_launcher_profiles_cannot_share_identity_keys_or_escape_names(tmp_
     assert app.state.settings.provider is None
     assert app.state.settings.data_dir == str(second)
     assert (second / 'identity.key').stat().st_mode & 0o777 == 0o600
+
+
+def test_enabled_browser_runtime_features_have_pinned_local_dependencies():
+    from html.parser import HTMLParser
+    from tools.build_web import RUNTIME_HASHES
+    class ScriptFeatures(HTMLParser):
+        enabled = set()
+        def handle_starttag(self, tag, attrs):
+            values = dict(attrs)
+            if tag == 'script' and values.get('src') == '/runtime/pythons.js':
+                self.enabled.update(values.get('data-os', '').split(','))
+    parser = ScriptFeatures()
+    parser.feed((ROOT / 'web/template.tmpl').read_text())
+    dependencies = {'fs': ('browserfs.min.js',), 'snd': ('empty.ogg',), 'vtx': ('vtx.js',)}
+    for feature in parser.enabled:
+        for filename in dependencies.get(feature, ()):
+            assert filename in RUNTIME_HASHES, f'{feature} needs a local pinned {filename}'
+
+
+async def test_same_origin_repository_adapter_is_safe_when_runtime_reloads_indexes(monkeypatch):
+    import sys
+    import types
+    from tools.build_web import SAME_ORIGIN_ADAPTER
+    config = types.SimpleNamespace(PKG_INDEXES=['https://old.invalid/'], dev_mode=0,
+        pkg_repolist=[{'-CDN-': 'https://old.invalid/'}])
+    async def upstream_async_repos():
+        fresh = {'-CDN-': 'https://pygame-web.github.io/archives/repo/'}
+        if fresh not in config.pkg_repolist:
+            config.pkg_repolist.append(fresh)
+        if config.dev_mode:
+            for index, repository in enumerate(config.pkg_repolist):
+                repository['-CDN-'] = config.PKG_INDEXES[index]
+    pep = types.ModuleType('aio.pep0723')
+    pep.Config = config
+    pep.async_repos = upstream_async_repos
+    aio = types.ModuleType('aio')
+    aio.pep0723 = pep
+    monkeypatch.setitem(sys.modules, 'aio', aio)
+    monkeypatch.setitem(sys.modules, 'aio.pep0723', pep)
+    namespace = {'platform': types.SimpleNamespace(window=types.SimpleNamespace(location=types.SimpleNamespace(origin='http://127.0.0.1:8765')))}
+    exec(SAME_ORIGIN_ADAPTER, namespace)
+    await pep.async_repos()
+    await pep.async_repos()
+    assert config.PKG_INDEXES == ['http://127.0.0.1:8765/runtime/repo/']
+    assert config.pkg_repolist == [{'-CDN-': config.PKG_INDEXES[0]}]

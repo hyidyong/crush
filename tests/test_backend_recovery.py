@@ -125,7 +125,7 @@ def test_browser_transport_ascii_requests_and_event_round_trip():
     assert bridge.sent.isascii() and json.loads(bridge.sent)['text']=='한국어도 안전하게'
     assert transport.drain_events()[0].payload['text']=='안녕'
     assert transport.get_health()['app']=='ready'
-    transport.reset('rio',1);assert bridge.cleared==('rio',1)
+    transport.reset('rio',1);assert bridge.cleared==('rio',1,'s')
 
 
 def test_native_transport_private_cookie_csrf_fifo_and_restart(tmp_path):
@@ -168,3 +168,54 @@ def test_native_transport_private_cookie_csrf_fifo_and_restart(tmp_path):
     restored=make();wait_for(lambda:restored.get_health()['app']=='ready')
     assert 'unsent_identity_fixture='+cookie in bootstraps[-1]
     restored.close()
+
+
+def test_native_identity_rotation_blocks_old_messages_and_resets(tmp_path):
+    import httpx
+    import time
+    from unsent.client.transport import DesktopTransport
+    active={'scope':'owner-A'};requests=[]
+    def handler(request):
+        requests.append((request.method,request.url.path,request.content))
+        if request.url.path=='/api/identity':
+            return httpx.Response(200,json={'storage_scope':active['scope'],'csrf_token':'csrf-'+active['scope']})
+        if request.url.path=='/api/health':return httpx.Response(200,json={'app':'ready','model':'unconfigured'})
+        pytest.fail('Old private data must never reach a mutation after identity rotation')
+    client=httpx.Client(base_url='http://127.0.0.1',transport=httpx.MockTransport(handler))
+    transport=DesktopTransport('http://127.0.0.1',identity_path=tmp_path/'identity.json',http_client=client)
+    deadline=time.monotonic()+3
+    while not transport.bootstrap_finished and time.monotonic()<deadline:time.sleep(.01)
+    assert transport.identity_ready and transport.storage_scope=='owner-A'
+    active['scope']='owner-B'
+    transport.start_chat(ChatRequest('previous-owner-session','rio',0,'old-message','DO_NOT_FORWARD_OLD_OWNER_DATA'))
+    deadline=time.monotonic()+3
+    while not transport.identity_changed and time.monotonic()<deadline:time.sleep(.01)
+    assert transport.identity_changed and transport.identity_status=='changed'
+    assert not transport.identity_ready and transport.storage_scope=='owner-B'
+    transport.reset('rio',1)
+    transport.start_chat(ChatRequest('previous-owner-session','rio',1,'retry','DO_NOT_FORWARD_OLD_OWNER_DATA'))
+    time.sleep(.03)
+    assert all(method=='GET' for method,_,_ in requests)
+    assert all(b'DO_NOT_FORWARD_OLD_OWNER_DATA' not in content for _,_,content in requests)
+    transport.close()
+
+
+def test_native_failed_bootstrap_has_no_verified_scope_or_mutations(tmp_path):
+    import httpx
+    import time
+    from unsent.client.transport import DesktopTransport
+    path=tmp_path/'identity.json';path.write_text('{"origin":"http://127.0.0.1","cookies":{}}');path.chmod(0o600)
+    previous=path.read_bytes();requests=[]
+    def handler(request):
+        requests.append(request.method)
+        return httpx.Response(503)
+    client=httpx.Client(base_url='http://127.0.0.1',transport=httpx.MockTransport(handler))
+    transport=DesktopTransport('http://127.0.0.1',identity_path=path,http_client=client)
+    deadline=time.monotonic()+3
+    while not transport.bootstrap_finished and time.monotonic()<deadline:time.sleep(.01)
+    assert transport.bootstrap_finished and transport.identity_status=='unavailable'
+    assert not transport.identity_ready and transport.storage_scope is None
+    transport.start_chat(ChatRequest('s','rio',0,'m','PRIVATE_UNVERIFIED'))
+    transport.reset('rio',1)
+    assert requests==['GET'] and path.read_bytes()==previous
+    transport.close()

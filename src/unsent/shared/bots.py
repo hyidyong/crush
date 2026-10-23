@@ -27,7 +27,8 @@ def read_document(name, raw):
     if not name.lower().endswith(('.txt', '.md')) or len(raw) > 65536:
         raise ValueError('TXT·MD 파일은 64KB까지 가져올 수 있어요.')
     try:
-        text = raw.decode('utf-8-sig').strip()
+        # The minimal browser Python runtime provides UTF-8 but not utf-8-sig.
+        text = raw.decode('utf-8').removeprefix('\ufeff').strip()
     except UnicodeDecodeError as exc:
         raise ValueError('UTF-8 텍스트 파일을 골라 주세요.') from exc
     if not text or '\x00' in text or len(text) > 12000:
