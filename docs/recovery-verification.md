@@ -17,4 +17,16 @@ The flows under test are:
 
 Use `uv run python tools/qa/browser_check.py` after starting the app server. The browser suite uses deterministic synthetic SSE responses for interaction checks. Genuine local-model inference and backend ownership tests are separate checks and must be reported separately.
 
-Status: 10 browser cases collect successfully. The first browser runs reached the local server and exposed missing runtime resources (`vtx.js`, then `browserfs.min.js`) and a corrupted WASM-side synchronous ZIP download. Runtime restoration is being corrected before running the interaction suite. No restored-app browser pass is claimed yet.
+Current verification (2026-10-23):
+
+- `uv sync --locked --all-extras` with a workspace-local UV cache: resolved32packages, checked31installedpackages; no repository dependency change.
+- `.venv/bin/python -m pytest -q`:28passed; browser tests excluded here and executed separately.
+- `.venv/bin/python -m pytest -m browser tests/browser -q`:13passed in99.01seconds using system Chromium, including actual WASM rendering and isolated bridge boundary checks. Replies in UI tests are synthetic transport fixtures; actual model check is separate.
+- Native Pygame smoke with SDL dummy, `--no-backend --frames2`: exit0 and rendered screenshot.
+- Public source audit:72trackedfiles, no matching credential values or private paths; allowlisted appZIP excludes backend/configuration.
+- Backend identity keys are0600; `.local` and per-user/profile directories are0700.
+- Real-model check was executed and failed with `Configured model is unavailable; no live check was substituted`. Pinned llama.cpp runtime was downloaded and verified, but the pinned Kanana weights request failed at the network proxy with403; direct DNS was also unavailable. Genuine AI conversation is not verified in this environment.
+
+Review fixes verified during recovery: CSRF field contract, raw-source import separated from active prompt, native identity-bound persistence and mutation continuity, fresh-session generation barrier, truncated SSE failure, queued DOM edit ordering, and browser-compatible UTF-8 BOM handling. Two-tab bridge tests cover both Web Locks and IndexedDB fallback; their isolated harness tests do not imply model inference.
+
+Public source is preserved on remote branch `recovery/unsent-app`; remote `main` remains the initial README commit. Runtime caches, identity keys, models, local bot sources and chat records are excluded. Environment setup/start instructions and public model-download domains were saved as a configuration draft; saving a draft does not apply it to this machine or publish an environment snapshot.
