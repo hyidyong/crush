@@ -1,0 +1,13 @@
+.venv/
+.local/
+.superpowers/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+.env
+.env.*
+!.env.example
+build/
+dist/
+.DS_Store

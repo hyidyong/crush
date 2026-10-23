@@ -1,0 +1,395 @@
+{
+  "self_avatar": "media/fictional-atlas.png#353,0,354,212",
+  "characters": [
+    {
+      "id": "rio",
+      "display_name": "리오",
+      "handle": "rio.frames",
+      "avatar": "media/fictional-atlas.png#0,0,353,212",
+      "bio": "사진 찍고 커피 마시는 사람.\n좋은 빛을 찾아 걷는 중",
+      "post_ids": [
+        "rio_0",
+        "rio_1",
+        "rio_2",
+        "rio_3",
+        "rio_4",
+        "rio_5"
+      ],
+      "note": "산책 중",
+      "followers": 248,
+      "following": 186,
+      "greeting": "오늘 뭐 했어?",
+      "translations": {
+        "en": {
+          "display_name": "Rio",
+          "bio": "Photos, coffee, and walks.\nAlways looking for good light.",
+          "note": "Out for a walk",
+          "greeting": "What did you get up to today?"
+        }
+      }
+    },
+    {
+      "id": "jiwoo",
+      "display_name": "지우",
+      "handle": "jiwoo.paper",
+      "avatar": "media/fictional-atlas.png#353,0,354,212",
+      "bio": "작은 것들을 그리고 모아요.\n커피는 늘 옆에",
+      "post_ids": [
+        "jiwoo_0",
+        "jiwoo_1",
+        "jiwoo_2",
+        "jiwoo_3",
+        "jiwoo_4",
+        "jiwoo_5"
+      ],
+      "note": "커피 급구",
+      "followers": 193,
+      "following": 227,
+      "greeting": "너 오늘 어땠어? ㅎㅎ",
+      "translations": {
+        "en": {
+          "display_name": "Jiwoo",
+          "bio": "Drawing and collecting little things.\nCoffee is never far away.",
+          "note": "Coffee needed",
+          "greeting": "How was your day?"
+        }
+      }
+    },
+    {
+      "id": "yuna",
+      "display_name": "유나",
+      "handle": "yuna.daily",
+      "avatar": "media/fictional-atlas.png#707,0,353,212",
+      "bio": "잘 먹고, 천천히 걸어요.\n가끔 꽃도 사고",
+      "post_ids": [
+        "yuna_0",
+        "yuna_1",
+        "yuna_2",
+        "yuna_3",
+        "yuna_4",
+        "yuna_5"
+      ],
+      "note": "오늘도 맑음",
+      "followers": 316,
+      "following": 205,
+      "greeting": "밥은 먹었어?",
+      "translations": {
+        "en": {
+          "display_name": "Yuna",
+          "bio": "Good food and unhurried walks.\nSometimes flowers, too.",
+          "note": "A sunny kind of day",
+          "greeting": "Have you eaten yet?"
+        }
+      }
+    }
+  ],
+  "posts": [
+    {
+      "id": "rio_0",
+      "character_id": "rio",
+      "images": [
+        "media/fictional-atlas.png#0,212,353,212",
+        "media/fictional-atlas.png#0,636,353,212"
+      ],
+      "caption": "커피는 식었는데 사진은 마음에 듦",
+      "description": "햇살 드는 카페의 카메라와 커피",
+      "like_count": 32,
+      "created_at": "2026-10-20",
+      "translations": {
+        "en": {
+          "caption": "Coffee went cold. Photo turned out well.",
+          "description": "A camera and coffee in a sunlit cafe."
+        }
+      }
+    },
+    {
+      "id": "rio_1",
+      "character_id": "rio",
+      "images": [
+        "media/fictional-atlas.png#0,424,353,212"
+      ],
+      "caption": "빛이 좋았던 오후",
+      "description": "나무가 있는 거리에서 찍은 가상 친구의 인물 사진",
+      "like_count": 39,
+      "created_at": "2026-10-17",
+      "translations": {
+        "en": {
+          "caption": "An afternoon with good light.",
+          "description": "A portrait of a fictional friend on a tree-lined street."
+        }
+      }
+    },
+    {
+      "id": "rio_2",
+      "character_id": "rio",
+      "images": [
+        "media/fictional-atlas.png#0,636,353,212"
+      ],
+      "caption": "카메라와 커피면 충분한 오후",
+      "description": "테이블 위 카메라와 커피",
+      "like_count": 46,
+      "created_at": "2026-10-14",
+      "translations": {
+        "en": {
+          "caption": "A camera and coffee kind of afternoon.",
+          "description": "A camera and coffee on a table."
+        }
+      }
+    },
+    {
+      "id": "rio_3",
+      "character_id": "rio",
+      "images": [
+        "media/fictional-atlas.png#0,848,353,212"
+      ],
+      "caption": "오늘도 조금 걸었어",
+      "description": "야외에서 찍은 리오의 사진",
+      "like_count": 53,
+      "created_at": "2026-10-11",
+      "translations": {
+        "en": {
+          "caption": "Got a little walk in today.",
+          "description": "A photo of Rio outdoors."
+        }
+      }
+    },
+    {
+      "id": "rio_4",
+      "character_id": "rio",
+      "images": [
+        "media/fictional-atlas.png#0,1060,353,212"
+      ],
+      "caption": "해가 지는 속도에 맞춰",
+      "description": "해질녘 강과 노을",
+      "like_count": 60,
+      "created_at": "2026-10-08",
+      "translations": {
+        "en": {
+          "caption": "Keeping pace with the setting sun.",
+          "description": "A river at sunset."
+        }
+      }
+    },
+    {
+      "id": "rio_5",
+      "character_id": "rio",
+      "images": [
+        "media/fictional-atlas.png#0,1272,353,212"
+      ],
+      "caption": "그늘에서 잠깐",
+      "description": "나뭇잎 그림자가 있는 벽",
+      "like_count": 67,
+      "created_at": "2026-10-05",
+      "translations": {
+        "en": {
+          "caption": "A moment in the shade.",
+          "description": "Leaf shadows on a quiet wall."
+        }
+      }
+    },
+    {
+      "id": "jiwoo_0",
+      "character_id": "jiwoo",
+      "images": [
+        "media/fictional-atlas.png#353,212,354,212"
+      ],
+      "caption": "선만 고치다가 오후가 됐다",
+      "description": "스케치북과 아이스 커피가 있는 작업대",
+      "like_count": 45,
+      "created_at": "2026-10-20",
+      "translations": {
+        "en": {
+          "caption": "Redrew the same line. Now it is afternoon.",
+          "description": "A workspace with a sketchbook and iced coffee."
+        }
+      }
+    },
+    {
+      "id": "jiwoo_1",
+      "character_id": "jiwoo",
+      "images": [
+        "media/fictional-atlas.png#353,424,354,212"
+      ],
+      "caption": "내가 좋아하는 작은 작업실",
+      "description": "붓과 종이가 놓인 햇살 드는 작업실",
+      "like_count": 52,
+      "created_at": "2026-10-17",
+      "translations": {
+        "en": {
+          "caption": "My favorite little studio.",
+          "description": "A sunlit studio with brushes and paper."
+        }
+      }
+    },
+    {
+      "id": "jiwoo_2",
+      "character_id": "jiwoo",
+      "images": [
+        "media/fictional-atlas.png#353,636,354,212"
+      ],
+      "caption": "종이는 왜 다 예쁘지",
+      "description": "책상 위 작은 종이 소품",
+      "like_count": 59,
+      "created_at": "2026-10-14",
+      "translations": {
+        "en": {
+          "caption": "Why is all stationery so pretty?",
+          "description": "Small paper objects on a desk."
+        }
+      }
+    },
+    {
+      "id": "jiwoo_3",
+      "character_id": "jiwoo",
+      "images": [
+        "media/fictional-atlas.png#353,848,354,212"
+      ],
+      "caption": "잠깐 바람 쐬러",
+      "description": "작업실 밖 지우의 인물 사진",
+      "like_count": 66,
+      "created_at": "2026-10-11",
+      "translations": {
+        "en": {
+          "caption": "Stepping out for a little air.",
+          "description": "A portrait of Jiwoo outside the studio."
+        }
+      }
+    },
+    {
+      "id": "jiwoo_4",
+      "character_id": "jiwoo",
+      "images": [
+        "media/fictional-atlas.png#353,1060,354,212"
+      ],
+      "caption": "비 오면 색이 더 선명해",
+      "description": "비 온 뒤 저녁 거리",
+      "like_count": 73,
+      "created_at": "2026-10-08",
+      "translations": {
+        "en": {
+          "caption": "Rain makes the colors brighter.",
+          "description": "An evening street after rain."
+        }
+      }
+    },
+    {
+      "id": "jiwoo_5",
+      "character_id": "jiwoo",
+      "images": [
+        "media/fictional-atlas.png#353,1272,354,212"
+      ],
+      "caption": "일단 간식부터",
+      "description": "토스트와 딸기 간식",
+      "like_count": 80,
+      "created_at": "2026-10-05",
+      "translations": {
+        "en": {
+          "caption": "Snacks first.",
+          "description": "Toast and strawberries for a snack."
+        }
+      }
+    },
+    {
+      "id": "yuna_0",
+      "character_id": "yuna",
+      "images": [
+        "media/fictional-atlas.png#707,212,353,212"
+      ],
+      "caption": "아침에 꽃을 들였어",
+      "description": "주방 테이블에 놓인 꽃병",
+      "like_count": 58,
+      "created_at": "2026-10-20",
+      "translations": {
+        "en": {
+          "caption": "Brought some flowers home this morning.",
+          "description": "A vase of flowers on a kitchen table."
+        }
+      }
+    },
+    {
+      "id": "yuna_1",
+      "character_id": "yuna",
+      "images": [
+        "media/fictional-atlas.png#707,424,353,212"
+      ],
+      "caption": "레시피는 참고만 하는 편",
+      "description": "집에서 파스타를 요리하는 손",
+      "like_count": 65,
+      "created_at": "2026-10-17",
+      "translations": {
+        "en": {
+          "caption": "Recipes are more of a suggestion.",
+          "description": "Hands making pasta at home."
+        }
+      }
+    },
+    {
+      "id": "yuna_2",
+      "character_id": "yuna",
+      "images": [
+        "media/fictional-atlas.png#707,636,353,212"
+      ],
+      "caption": "작은 꽃다발이면 충분해",
+      "description": "꽃다발을 든 공원의 유나",
+      "like_count": 72,
+      "created_at": "2026-10-14",
+      "translations": {
+        "en": {
+          "caption": "A little bouquet is enough.",
+          "description": "Yuna holding a bouquet in a park."
+        }
+      }
+    },
+    {
+      "id": "yuna_3",
+      "character_id": "yuna",
+      "images": [
+        "media/fictional-atlas.png#707,848,353,212"
+      ],
+      "caption": "오늘의 점심 성공",
+      "description": "직접 만든 파스타 한 접시",
+      "like_count": 79,
+      "created_at": "2026-10-11",
+      "translations": {
+        "en": {
+          "caption": "Lunch turned out well today.",
+          "description": "A plate of homemade pasta."
+        }
+      }
+    },
+    {
+      "id": "yuna_4",
+      "character_id": "yuna",
+      "images": [
+        "media/fictional-atlas.png#707,1060,353,212"
+      ],
+      "caption": "아침 바다는 늘 좋아",
+      "description": "아침 바닷가에 있는 가상 친구의 인물 사진",
+      "like_count": 86,
+      "created_at": "2026-10-08",
+      "translations": {
+        "en": {
+          "caption": "Always a fan of the sea in the morning.",
+          "description": "A fictional friend beside the morning sea."
+        }
+      }
+    },
+    {
+      "id": "yuna_5",
+      "character_id": "yuna",
+      "images": [
+        "media/fictional-atlas.png#707,1272,353,212"
+      ],
+      "caption": "시장 구경이 제일 재밌어",
+      "description": "꽃과 과일이 있는 시장",
+      "like_count": 93,
+      "created_at": "2026-10-05",
+      "translations": {
+        "en": {
+          "caption": "The market is my favorite place to wander.",
+          "description": "A market with flowers and fruit."
+        }
+      }
+    }
+  ]
+}

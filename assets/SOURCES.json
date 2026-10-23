@@ -1,0 +1,35 @@
+{
+  "notice": "Public fictional demo assets only. No personal reference images or user records are included.",
+  "atlas": {
+    "columns": 3,
+    "rows": 7,
+    "width": 1060,
+    "height": 1484
+  },
+  "files": [
+    {
+      "path": "media/fictional-atlas.png",
+      "sha256": "d7de5e63e5783517cf465d92c3f4e6471af4d8339b8d244cd1d8a2d89a00e569",
+      "source": "OpenAI Image Generation; fictional adults and everyday scenes",
+      "license": "Generated fictional artwork"
+    },
+    {
+      "path": "fonts/NotoSansKR-Regular.ttf",
+      "sha256": "7efeea02e263c527fe0b161df53923aca99d07b416b1afbf929da6831ee1ddbd",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "path": "fonts/NotoSansKR-Bold.ttf",
+      "sha256": "9bc2501d6de6080bb67e528b4ea0cb28b0d15ce37fb20d3b7424566f1431247d",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "path": "fonts/OFL.txt",
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+      "license": "SIL Open Font License 1.1"
+    }
+  ]
+}

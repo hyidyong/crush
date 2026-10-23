@@ -1,0 +1,30 @@
+[project]
+name = "unsent"
+version = "0.2.0"
+description = "Private fictional-character DM simulator"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "pygame-ce==2.5.8",
+  "pygbag==0.9.3",
+  "fastapi==0.156.8",
+  "httpx>=0.28.1,<0.29",
+  "uvicorn>=0.34,<1",
+  "Pillow>=11,<13",
+  "fonttools>=4.55,<5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-asyncio>=1,<2", "playwright>=1.50,<2"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+asyncio_mode = "auto"
+addopts = "-m 'not browser and not live'"
+markers = ["browser: Chromium UI integration tests", "live: actual configured model inference tests"]
